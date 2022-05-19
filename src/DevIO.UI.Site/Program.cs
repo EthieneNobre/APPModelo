@@ -1,5 +1,7 @@
 // Tudo inicia a partir do builder
+using DevIO.UI.Site.Data;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,10 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
 });
 
+builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
+
+builder.Services.AddDbContext<MeuDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Conexao")));
 
 // Adicionando o MVC ao container
 builder.Services.AddControllersWithViews();

@@ -1,1 +1,6 @@
-﻿Salve!!
+﻿@using DevIO.UI.Site.Data
+@inject IPedidoRepository PedidoRepository
+
+
+
+Número Pedido: @PedidoRepository.ObterPedido().Id
